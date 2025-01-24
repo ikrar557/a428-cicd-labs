@@ -8,9 +8,13 @@ node {
             stage('Build') {
                 sh 'npm install'
             }
-
             stage('Test') {
                 sh './jenkins/scripts/test.sh'
+            }
+            stage('Deploy') {
+                sh './jenkins/scripts/deploy.sh'
+                input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)'
+                sh './jenkins/scripts/kill.sh'
             }
         } catch (Exception e) {
             error "Pipeline Error: ${e.message}"
