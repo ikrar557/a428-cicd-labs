@@ -13,7 +13,7 @@ node {
                 sh './jenkins/scripts/test.sh'
             }
         } catch (Exception e) {
-            error "Pipeline failed: ${e.message}"
+            error "Pipeline Error: ${e.message}"
         }
     }
 }
