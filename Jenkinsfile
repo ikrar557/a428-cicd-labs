@@ -11,9 +11,14 @@ node {
             stage('Test') {
                 sh './jenkins/scripts/test.sh'
             }
+            stage('Manual Approval') {
+                input message: 'Lanjutkan ke tahap Deploy?',
+                      ok: 'Proceed',
+            }
             stage('Deploy') {
                 sh './jenkins/scripts/deliver.sh'
-                input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)'
+                echo 'Aplikasi sedang berjalan. Tunggu 1 menit sebelum dimatikan...'
+                sleep(time: 60, unit: 'SECONDS')
                 sh './jenkins/scripts/kill.sh'
             }
         } catch (Exception e) {
