@@ -13,7 +13,7 @@ node {
             }
             stage('Manual Approval') {
                 input message: 'Lanjutkan ke tahap Deploy?',
-                      ok: 'Proceed',
+                ok: 'Proceed',
             }
             stage('Deploy') {
                 sh './jenkins/scripts/deliver.sh'
