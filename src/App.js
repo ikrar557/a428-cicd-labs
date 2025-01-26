@@ -53,9 +53,10 @@ class App extends Component {
 
           <div className="dashboard-card">
             <h2>Quick Links</h2>
-            <a href="http://localhost:49000" className="dashboard-link">Jenkins Dashboard</a>
-            <a href="http://localhost:9000" className="dashboard-link">Nginx Status</a>
-            <a href="http://localhost:3031" className="dashboard-link">Grafana Metrics</a>
+            <a href={process.env.REACT_APP_JENKINS_URL} className="dashboard-link">Jenkins Dashboard</a>
+            <a href={process.env.REACT_APP_NGINX_URL} className="dashboard-link">Nginx Status</a>
+            <a href={process.env.REACT_APP_GRAFANA_URL} className="dashboard-link">Grafana Metrics</a>
+            <a href={process.env.REACT_APP_PROMETHEUS_URL} className="dashboard-link">Prometheus Metrics</a>
           </div>
         </main>
       </div>
