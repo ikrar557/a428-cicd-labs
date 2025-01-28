@@ -5,8 +5,8 @@ node {
     stage('Checkout') {
         checkout scm
     }
-
-    docker.image('node:16-buster-slim').inside {
+    
+    docker.image('node:16-buster-slim').inside('-v $WORKSPACE:/app -w /app') {
         stage('Build') {
             sh 'npm install'
             sh 'npm run build'
