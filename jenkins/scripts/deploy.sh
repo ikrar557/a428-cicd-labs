@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+HOST_URL=$(echo ${EC2_HOST} | cut -d '@' -f2)
+
 # Copy files to EC2
 scp -o StrictHostKeyChecking=no build/* ${EC2_HOST}:${DEPLOY_PATH}/
 scp -o StrictHostKeyChecking=no Dockerfile ${EC2_HOST}:${DEPLOY_PATH}/
@@ -15,5 +17,5 @@ ssh -o StrictHostKeyChecking=no ${EC2_HOST} "
 "
 
 echo "✨ Application deployed successfully!"
-echo "🌍 You can now access the application at: http://${EC2_HOST}:3000"
+echo "🌍 You can now access the application at: http://${HOST_URL}:3000"
 echo "⏳ The application will remain accessible for 1 minute."
