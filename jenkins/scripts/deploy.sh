@@ -3,6 +3,7 @@
 # Copy files to EC2
 scp -o StrictHostKeyChecking=no build/* ${EC2_HOST}:${DEPLOY_PATH}/
 scp -o StrictHostKeyChecking=no Dockerfile ${EC2_HOST}:${DEPLOY_PATH}/
+scp -o StrictHostKeyChecking=no package.json ${EC2_HOST}:${DEPLOY_PATH}/
 
 # Deploy to EC2
 ssh -o StrictHostKeyChecking=no ${EC2_HOST} "
