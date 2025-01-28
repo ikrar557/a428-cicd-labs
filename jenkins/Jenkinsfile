@@ -22,21 +22,23 @@ node {
     }
     
     stage('Deploy') {
-        withEnv(["EC2_HOST=${EC2_HOST}", "DEPLOY_PATH=${DEPLOY_PATH}"]) {
-            sh '''
-                chmod +x ./jenkins/scripts/deploy.sh
-                ./jenkins/scripts/deploy.sh
-            '''
-            
-            echo 'Aplikasi sedang berjalan. Tunggu 1 menit sebelum dimatikan...'
-            sleep(time: 60, unit: 'SECONDS')
-            
-            sh '''
-                chmod +x ./jenkins/scripts/kill.sh
-                ./jenkins/scripts/kill.sh
-            '''
-            
-            echo 'Aplikasi berhasil dimatikan'
+        sshagent(['ec2-ssh-key']) {
+            withEnv(["EC2_HOST=${EC2_HOST}", "DEPLOY_PATH=${DEPLOY_PATH}"]) {
+                sh '''
+                    chmod +x ./jenkins/scripts/deploy.sh
+                    ./jenkins/scripts/deploy.sh
+                '''
+                
+                echo 'Aplikasi sedang berjalan. Tunggu 1 menit sebelum dimatikan...'
+                sleep(time: 60, unit: 'SECONDS')
+                
+                sh '''
+                    chmod +x ./jenkins/scripts/kill.sh
+                    ./jenkins/scripts/kill.sh
+                '''
+                
+                echo 'Aplikasi berhasil dimatikan'
+            }
         }
     }
 }
